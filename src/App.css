@@ -1,5 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap");
+
 .App {
   text-align: center;
+  font-family: "Karla", sans-serif;
 }
 
 .App-logo {

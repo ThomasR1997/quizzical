@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { LandingPage } from "./pages/landingPage/LandingPage";
+import { QuizPage } from "./pages/quizPage/QuizPage";
+import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import { ApiContext } from "./contextState/ApiContext";
+import { GetApiData } from "./components/GetApiData";
+import { AnswersContext } from "./contextState/AnswersContext";
 
 function App() {
+  const [apiData, setApiData] = useState([]);
+  const [answers, setAnswers] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApiContext.Provider value={{ apiData, setApiData }}>
+      <AnswersContext.Provider value={{ answers, setAnswers }}>
+        <>
+          <div className="App">
+            <GetApiData />
+          </div>
+
+          <Routes>
+            <Route path="*" element={<LandingPage />} />
+            <Route path="/quiz-page" element={<QuizPage />} />
+          </Routes>
+        </>
+      </AnswersContext.Provider>
+    </ApiContext.Provider>
   );
 }
 
